@@ -1,0 +1,158 @@
+[
+  {
+    "id": "manufacturing",
+    "name": "製造業",
+    "adoptionRate": 30.9,
+    "recommendedCategories": ["growth-normal", "green-growth", "gx"],
+    "tips": [
+      "具体的な設備投資計画を示す",
+      "技術力の活用方法を明確に説明",
+      "新分野展開における実現可能性を数値で証明"
+    ],
+    "risks": [
+      "BtoB→BtoCへの転換は採択率が低め"
+    ]
+  },
+  {
+    "id": "construction",
+    "name": "建設業",
+    "adoptionRate": 28.5,
+    "recommendedCategories": ["growth-normal", "green-growth"],
+    "tips": [
+      "既存の技術力・資格を活用した事業転換",
+      "省エネ・環境関連への展開が有利",
+      "地域密着型のサービス展開"
+    ],
+    "risks": [
+      "単純な業態変更は評価されにくい"
+    ]
+  },
+  {
+    "id": "wholesale-retail",
+    "name": "卸売業・小売業",
+    "adoptionRate": 25.3,
+    "recommendedCategories": ["growth-normal", "minimum-wage"],
+    "tips": [
+      "EC展開との組み合わせが有効",
+      "既存の仕入れルート・顧客基盤を活用",
+      "DX化による業務効率化をアピール"
+    ],
+    "risks": [
+      "単純なEC化だけでは差別化が難しい"
+    ]
+  },
+  {
+    "id": "accommodation-food",
+    "name": "宿泊業・飲食サービス業",
+    "adoptionRate": 22.1,
+    "recommendedCategories": ["minimum-wage", "growth-normal"],
+    "tips": [
+      "レンタルスペース・テイクアウト等の複合化",
+      "遊休時間帯の有効活用",
+      "既存設備・立地を活かした転換"
+    ],
+    "risks": [
+      "サウナ・エステ等は「一過性の流行」と見なされやすい",
+      "競合が多いため差別化が重要"
+    ]
+  },
+  {
+    "id": "information-communication",
+    "name": "情報通信業",
+    "adoptionRate": 26.8,
+    "recommendedCategories": ["growth-normal", "gx"],
+    "tips": [
+      "DX支援サービスへの展開",
+      "既存の技術力を活かした新サービス開発",
+      "BtoB向けソリューション提供"
+    ],
+    "risks": [
+      "技術的な実現可能性の証明が必要"
+    ]
+  },
+  {
+    "id": "real-estate",
+    "name": "不動産業",
+    "adoptionRate": 24.5,
+    "recommendedCategories": ["growth-normal", "minimum-wage"],
+    "tips": [
+      "遊休不動産のレンタルスペース化",
+      "民泊・簡易宿所への転換",
+      "既存物件を活用した新規事業"
+    ],
+    "risks": [
+      "不動産購入は補助対象外",
+      "新築は基本NG"
+    ]
+  },
+  {
+    "id": "medical-welfare",
+    "name": "医療・福祉",
+    "adoptionRate": 23.2,
+    "recommendedCategories": ["growth-normal", "minimum-wage"],
+    "tips": [
+      "介護・福祉サービスの拡充",
+      "健康関連サービスへの展開",
+      "オンライン診療・相談サービス"
+    ],
+    "risks": [
+      "規制・許認可の確認が必要"
+    ]
+  },
+  {
+    "id": "professional-services",
+    "name": "専門・技術サービス業",
+    "adoptionRate": 27.1,
+    "recommendedCategories": ["growth-normal", "gx"],
+    "tips": [
+      "オンラインサービス化",
+      "新分野へのコンサルティング展開",
+      "DXを活用した業務効率化"
+    ],
+    "risks": [
+      "サービスの差別化が重要"
+    ]
+  },
+  {
+    "id": "other-services",
+    "name": "その他サービス業",
+    "adoptionRate": 21.5,
+    "recommendedCategories": ["growth-normal", "minimum-wage"],
+    "tips": [
+      "既存顧客基盤を活用した新サービス",
+      "遊休資産の有効活用",
+      "地域密着型のサービス展開"
+    ],
+    "risks": [
+      "持続可能性・成長性の説明が難しい場合がある"
+    ]
+  },
+  {
+    "id": "agriculture-forestry",
+    "name": "農業・林業",
+    "adoptionRate": 29.3,
+    "recommendedCategories": ["growth-normal", "green-growth"],
+    "tips": [
+      "6次産業化（加工・販売）への展開",
+      "観光農園・体験型サービス",
+      "EC直販への展開"
+    ],
+    "risks": [
+      "季節性・天候リスクへの対策が必要"
+    ]
+  },
+  {
+    "id": "transportation",
+    "name": "運輸業",
+    "adoptionRate": 24.8,
+    "recommendedCategories": ["growth-normal", "green-growth"],
+    "tips": [
+      "物流DX・効率化",
+      "新規配送サービスへの展開",
+      "倉庫スペースの有効活用"
+    ],
+    "risks": [
+      "設備投資が大きくなりがち"
+    ]
+  }
+]

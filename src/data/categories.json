@@ -1,0 +1,46 @@
+[
+  {
+    "id": "growth-normal",
+    "name": "成長分野進出枠（通常類型）",
+    "adoptionRate": 49.9,
+    "description": "成長分野への新規参入を目指す事業者向け",
+    "maxAmount": "7,000万円",
+    "requirements": [
+      "成長分野への事業転換",
+      "売上高10%以上の増加計画"
+    ]
+  },
+  {
+    "id": "gx",
+    "name": "成長分野進出枠（GX進出類型）",
+    "adoptionRate": 36.8,
+    "description": "グリーントランスフォーメーション関連への進出",
+    "maxAmount": "1億円",
+    "requirements": [
+      "GX関連分野への参入",
+      "カーボンニュートラルへの貢献"
+    ]
+  },
+  {
+    "id": "green-growth",
+    "name": "グリーン成長枠",
+    "adoptionRate": 31.3,
+    "description": "脱炭素・環境関連分野への進出",
+    "maxAmount": "1.5億円",
+    "requirements": [
+      "グリーン成長戦略14分野への参入",
+      "研究開発・設備投資計画"
+    ]
+  },
+  {
+    "id": "minimum-wage",
+    "name": "コロナ回復加速化枠（最低賃金類型）",
+    "adoptionRate": 36.8,
+    "description": "最低賃金引き上げに取り組む事業者向け",
+    "maxAmount": "1,500万円",
+    "requirements": [
+      "最低賃金+50円以上の引き上げ計画",
+      "コロナからの回復途上"
+    ]
+  }
+]

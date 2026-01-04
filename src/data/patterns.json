@@ -1,0 +1,207 @@
+[
+  {
+    "id": "restaurant-to-rental",
+    "fromIndustry": ["accommodation-food"],
+    "toPattern": "レンタルスペース",
+    "difficulty": "低",
+    "adoptionRate": "高",
+    "recommendedAmount": "1,500〜3,000万円",
+    "points": [
+      "既存店舗・設備の活用",
+      "遊休時間帯（昼間）の有効活用",
+      "テレワーク需要の取り込み"
+    ],
+    "risks": [
+      "2025年以降の新事業進出補助金では対象外の可能性"
+    ],
+    "cases": [
+      "居酒屋の個室→昼間のテレワークスペース",
+      "カフェ→イベントスペース・撮影スタジオ"
+    ]
+  },
+  {
+    "id": "hotel-to-workation",
+    "fromIndustry": ["accommodation-food", "real-estate"],
+    "toPattern": "ワーケーション施設",
+    "difficulty": "中",
+    "adoptionRate": "中〜高",
+    "recommendedAmount": "2,000〜5,000万円",
+    "points": [
+      "既存宿泊施設のリノベーション",
+      "リモートワーク対応設備の整備",
+      "長期滞在プランの開発"
+    ],
+    "risks": [
+      "需要の継続性の証明が必要"
+    ],
+    "cases": [
+      "旅館→ワーケーション対応施設",
+      "ホテル→サテライトオフィス併設"
+    ]
+  },
+  {
+    "id": "manufacturing-to-medical",
+    "fromIndustry": ["manufacturing"],
+    "toPattern": "医療・福祉機器製造",
+    "difficulty": "中",
+    "adoptionRate": "高",
+    "recommendedAmount": "2,500〜5,000万円",
+    "points": [
+      "既存の加工技術・設備を活用",
+      "成長市場への参入",
+      "高付加価値製品の製造"
+    ],
+    "risks": [
+      "品質管理・認証取得が必要な場合あり"
+    ],
+    "cases": [
+      "金属加工業→医療機器部品製造",
+      "プラスチック成形→介護用品製造"
+    ]
+  },
+  {
+    "id": "manufacturing-to-green",
+    "fromIndustry": ["manufacturing", "construction"],
+    "toPattern": "環境・省エネ関連製品",
+    "difficulty": "中",
+    "adoptionRate": "高",
+    "recommendedAmount": "3,000〜7,000万円",
+    "points": [
+      "GX関連で高い採択率",
+      "既存技術の応用",
+      "社会的要請に合致"
+    ],
+    "risks": [
+      "技術的な実現可能性の証明が必要"
+    ],
+    "cases": [
+      "板金加工→太陽光パネル架台製造",
+      "建設業→省エネリフォーム事業"
+    ]
+  },
+  {
+    "id": "retail-to-ec",
+    "fromIndustry": ["wholesale-retail"],
+    "toPattern": "EC・オンライン販売",
+    "difficulty": "低",
+    "adoptionRate": "中",
+    "recommendedAmount": "1,000〜2,500万円",
+    "points": [
+      "既存の商品・仕入れルートを活用",
+      "全国展開が可能",
+      "DX化による業務効率化"
+    ],
+    "risks": [
+      "EC単体では差別化が難しい",
+      "独自性・付加価値の説明が重要"
+    ],
+    "cases": [
+      "地域の小売店→特産品EC",
+      "卸売業→BtoC直販サイト"
+    ]
+  },
+  {
+    "id": "real-estate-to-minpaku",
+    "fromIndustry": ["real-estate", "construction"],
+    "toPattern": "民泊・簡易宿所",
+    "difficulty": "中",
+    "adoptionRate": "中",
+    "recommendedAmount": "1,500〜4,000万円",
+    "points": [
+      "遊休不動産の有効活用",
+      "インバウンド需要の取り込み",
+      "建物改修は補助対象"
+    ],
+    "risks": [
+      "「一過性の流行」と見なされやすい",
+      "差別化要素が重要",
+      "新築は基本NG"
+    ],
+    "cases": [
+      "空き家→デザイナーズ民泊",
+      "倉庫→ゲストハウス"
+    ]
+  },
+  {
+    "id": "service-to-online",
+    "fromIndustry": ["professional-services", "other-services"],
+    "toPattern": "オンラインサービス化",
+    "difficulty": "低",
+    "adoptionRate": "中",
+    "recommendedAmount": "500〜2,000万円",
+    "points": [
+      "既存サービスのオンライン展開",
+      "全国・海外への市場拡大",
+      "低コストで開始可能"
+    ],
+    "risks": [
+      "オンライン化だけでは差別化が弱い"
+    ],
+    "cases": [
+      "対面コンサル→オンラインコンサル",
+      "教室業→オンラインスクール"
+    ]
+  },
+  {
+    "id": "agriculture-to-6th",
+    "fromIndustry": ["agriculture-forestry"],
+    "toPattern": "6次産業化（加工・販売）",
+    "difficulty": "中",
+    "adoptionRate": "高",
+    "recommendedAmount": "2,000〜5,000万円",
+    "points": [
+      "生産から加工・販売まで一貫",
+      "高付加価値化",
+      "地域ブランドの確立"
+    ],
+    "risks": [
+      "加工設備・販路開拓が必要"
+    ],
+    "cases": [
+      "農家→加工品製造・直販",
+      "果樹園→ジャム・ジュース製造販売"
+    ]
+  },
+  {
+    "id": "food-to-delivery",
+    "fromIndustry": ["accommodation-food"],
+    "toPattern": "テイクアウト・デリバリー",
+    "difficulty": "低",
+    "adoptionRate": "中",
+    "recommendedAmount": "500〜1,500万円",
+    "points": [
+      "既存の調理設備を活用",
+      "新規顧客層の開拓",
+      "EC販売との組み合わせ"
+    ],
+    "risks": [
+      "差別化要素が重要",
+      "競合が多い"
+    ],
+    "cases": [
+      "レストラン→冷凍食品EC",
+      "居酒屋→弁当・デリバリー"
+    ]
+  },
+  {
+    "id": "import-to-ec",
+    "fromIndustry": ["wholesale-retail", "other-services"],
+    "toPattern": "輸入物販・越境EC",
+    "difficulty": "中",
+    "adoptionRate": "中",
+    "recommendedAmount": "1,500〜3,000万円",
+    "points": [
+      "海外商品の国内販売",
+      "EC基盤の構築",
+      "独自の仕入れルート確保"
+    ],
+    "risks": [
+      "為替リスク・輸入規制への対応",
+      "品質管理体制の構築が必要"
+    ],
+    "cases": [
+      "雑貨店→海外雑貨EC",
+      "商社機能→BtoC越境EC"
+    ]
+  }
+]
