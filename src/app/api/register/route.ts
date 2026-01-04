@@ -44,27 +44,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 1. UTAGE Webhookに送信（設定されている場合）
-    const utageWebhookUrl = process.env.UTAGE_WEBHOOK_URL;
-    if (utageWebhookUrl) {
+    // 1. UTAGEに登録（設定されている場合）
+    const utageStoreUrl = process.env.UTAGE_WEBHOOK_URL;
+    if (utageStoreUrl) {
       try {
-        await fetch(utageWebhookUrl, {
+        // UTAGEはform-urlencoded形式でデータを受け付ける
+        const formData = new URLSearchParams();
+        formData.append("mail", body.email);
+        formData.append("rid", ""); // UTAGEの必須フィールド
+
+        await fetch(utageStoreUrl, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: JSON.stringify({
-            email: body.email,
-            company_name: body.companyName || "",
-            contact_name: body.contactName || "",
-            phone: body.phone || "",
-            industry: body.diagnosisResult.industryName,
-            source: "saikouchiku-navi",
-            timestamp: new Date().toISOString(),
-          }),
+          body: formData.toString(),
         });
+        console.log("UTAGE registration sent:", body.email);
       } catch (error) {
-        console.error("UTAGE Webhook error:", error);
+        console.error("UTAGE registration error:", error);
         // UTAGEへの送信失敗はエラーにしない
       }
     }
