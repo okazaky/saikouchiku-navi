@@ -4,7 +4,8 @@ import { useState } from "react";
 import { getIndustries, diagnose } from "@/lib/diagnosis";
 import type { DiagnosisInput, DiagnosisResult } from "@/types";
 
-type Step = "input" | "result" | "register" | "complete";
+// フロー: input → register → result
+type Step = "input" | "register" | "result";
 
 interface RegisterForm {
   email: string;
@@ -34,6 +35,7 @@ export default function Home() {
     phone: "",
   });
 
+  // 診断実行 → 登録フォームへ（結果はまだ見せない）
   const handleDiagnosis = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.industryId) {
@@ -42,13 +44,10 @@ export default function Home() {
     }
     const diagnosisResult = diagnose(input);
     setResult(diagnosisResult);
-    setStep("result");
+    setStep("register"); // 登録フォームへ
   };
 
-  const handleShowRegister = () => {
-    setStep("register");
-  };
-
+  // 登録完了 → 結果表示
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!registerForm.email || !registerForm.email.includes("@")) {
@@ -89,7 +88,7 @@ export default function Home() {
         throw new Error(data.error || "登録に失敗しました");
       }
 
-      setStep("complete");
+      setStep("result"); // 結果表示へ
     } catch (error) {
       alert(error instanceof Error ? error.message : "エラーが発生しました");
     } finally {
@@ -275,9 +274,201 @@ export default function Home() {
           </div>
         )}
 
-        {/* Step: Result */}
+        {/* Step: Register（診断後、結果を見る前に必須登録） */}
+        {step === "register" && (
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-8 h-8 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                診断が完了しました
+              </h2>
+              <p className="text-gray-600">
+                診断結果を確認するには、メールアドレスをご登録ください。
+                <br />
+                結果の詳細レポートもメールでお届けします。
+              </p>
+            </div>
+
+            {/* 診断結果のプレビュー */}
+            {result && (
+              <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                <p className="text-sm text-gray-600 mb-2">
+                  <span className="font-bold text-gray-800">{result.industry.name}</span>
+                  の診断結果が準備できました
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                    おすすめ申請枠: {result.recommendedCategories.length}件
+                  </span>
+                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                    おすすめ転換パターン: {result.recommendedPatterns.length}件
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <form onSubmit={handleRegister} className="space-y-6">
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  メールアドレス <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={registerForm.email}
+                  onChange={(e) =>
+                    setRegisterForm({ ...registerForm, email: e.target.value })
+                  }
+                  placeholder="example@company.com"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="companyName"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  会社名（任意）
+                </label>
+                <input
+                  type="text"
+                  id="companyName"
+                  value={registerForm.companyName}
+                  onChange={(e) =>
+                    setRegisterForm({
+                      ...registerForm,
+                      companyName: e.target.value,
+                    })
+                  }
+                  placeholder="株式会社サンプル"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contactName"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  担当者名（任意）
+                </label>
+                <input
+                  type="text"
+                  id="contactName"
+                  value={registerForm.contactName}
+                  onChange={(e) =>
+                    setRegisterForm({
+                      ...registerForm,
+                      contactName: e.target.value,
+                    })
+                  }
+                  placeholder="山田 太郎"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  電話番号（任意）
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={registerForm.phone}
+                  onChange={(e) =>
+                    setRegisterForm({ ...registerForm, phone: e.target.value })
+                  }
+                  placeholder="03-1234-5678"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
+                />
+              </div>
+
+              {/* LINE CTA */}
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <p className="text-sm text-green-800 mb-3">
+                  <span className="font-bold">LINE公式アカウントもご登録ください</span>
+                  <br />
+                  最新の補助金情報や採択のコツをお届けします
+                </p>
+                <a
+                  href="https://line.me/R/ti/p/@example"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-green-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
+                  </svg>
+                  LINE友だち追加
+                </a>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold rounded-lg transition-colors text-lg"
+              >
+                {isSubmitting ? "送信中..." : "登録して診断結果を見る"}
+              </button>
+            </form>
+
+            <p className="text-xs text-gray-500 mt-4 text-center">
+              ご登録いただいた情報は、診断レポートの送信および関連情報のご案内に使用します。
+            </p>
+          </div>
+        )}
+
+        {/* Step: Result（登録後に表示） */}
         {step === "result" && result && (
           <div className="space-y-6">
+            {/* 登録完了メッセージ */}
+            <div className="bg-green-50 border border-green-200 rounded-2xl p-6 text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-6 h-6 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              <p className="text-green-800 font-medium">
+                登録が完了しました。診断結果の詳細レポートをメールでもお送りしました。
+              </p>
+            </div>
+
             <div className="bg-white rounded-2xl shadow-lg p-8">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-800">診断結果</h2>
@@ -437,205 +628,9 @@ export default function Home() {
               </div>
             )}
 
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl shadow-lg p-8 text-center text-white">
-              <h3 className="text-xl font-bold mb-2">
-                詳細な診断レポートをメールでお届け
-              </h3>
-              <p className="text-blue-100 mb-6">
-                メールアドレスをご登録いただくと、この診断結果の詳細レポートをお送りします
-              </p>
-              <button
-                onClick={handleShowRegister}
-                className="bg-white text-blue-600 font-bold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors"
-              >
-                無料でレポートを受け取る
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Step: Register */}
-        {step === "register" && (
-          <div className="bg-white rounded-2xl shadow-lg p-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                メールで診断レポートを受け取る
-              </h2>
-              <p className="text-gray-600">
-                以下の情報をご入力ください。診断結果の詳細レポートをメールでお送りします。
-              </p>
-            </div>
-
-            <form onSubmit={handleRegister} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  メールアドレス <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={registerForm.email}
-                  onChange={(e) =>
-                    setRegisterForm({ ...registerForm, email: e.target.value })
-                  }
-                  placeholder="example@company.com"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="companyName"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  会社名（任意）
-                </label>
-                <input
-                  type="text"
-                  id="companyName"
-                  value={registerForm.companyName}
-                  onChange={(e) =>
-                    setRegisterForm({
-                      ...registerForm,
-                      companyName: e.target.value,
-                    })
-                  }
-                  placeholder="株式会社サンプル"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="contactName"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  担当者名（任意）
-                </label>
-                <input
-                  type="text"
-                  id="contactName"
-                  value={registerForm.contactName}
-                  onChange={(e) =>
-                    setRegisterForm({
-                      ...registerForm,
-                      contactName: e.target.value,
-                    })
-                  }
-                  placeholder="山田 太郎"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  電話番号（任意）
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  value={registerForm.phone}
-                  onChange={(e) =>
-                    setRegisterForm({ ...registerForm, phone: e.target.value })
-                  }
-                  placeholder="03-1234-5678"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
-                />
-              </div>
-
-              {/* LINE CTA */}
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <p className="text-sm text-green-800 mb-3">
-                  <span className="font-bold">LINE公式アカウントもご登録ください</span>
-                  <br />
-                  最新の補助金情報や採択のコツをお届けします
-                </p>
-                <a
-                  href="https://line.me/R/ti/p/@example"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-green-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
-                  </svg>
-                  LINE友だち追加
-                </a>
-              </div>
-
-              <div className="flex gap-4">
-                <button
-                  type="button"
-                  onClick={() => setStep("result")}
-                  className="flex-1 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  戻る
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold rounded-lg transition-colors"
-                >
-                  {isSubmitting ? "送信中..." : "レポートを受け取る"}
-                </button>
-              </div>
-            </form>
-
-            <p className="text-xs text-gray-500 mt-4 text-center">
-              ご登録いただいた情報は、診断レポートの送信および関連情報のご案内に使用します。
-            </p>
-          </div>
-        )}
-
-        {/* Step: Complete */}
-        {step === "complete" && (
-          <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg
-                className="w-8 h-8 text-green-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              登録が完了しました
-            </h2>
-
-            <p className="text-gray-600 mb-8">
-              ご登録いただいたメールアドレスに
-              <br />
-              診断結果の詳細レポートをお送りしました。
-            </p>
-
-            <div className="bg-blue-50 rounded-lg p-6 mb-8">
-              <p className="text-sm text-blue-800">
-                メールが届かない場合は、迷惑メールフォルダをご確認ください。
-              </p>
-            </div>
-
             {/* LINE CTA */}
-            <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
-              <h3 className="font-bold text-green-800 mb-2">
+            <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+              <h3 className="font-bold text-green-800 text-xl mb-2">
                 LINE公式アカウントにもご登録ください
               </h3>
               <p className="text-sm text-green-700 mb-4">
@@ -657,13 +652,6 @@ export default function Home() {
                 LINE友だち追加
               </a>
             </div>
-
-            <button
-              onClick={handleReset}
-              className="text-blue-600 hover:text-blue-800 font-medium"
-            >
-              もう一度診断する
-            </button>
           </div>
         )}
       </main>
