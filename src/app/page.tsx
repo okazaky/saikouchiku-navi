@@ -413,7 +413,7 @@ export default function Home() {
                   最新の補助金情報や採択のコツをお届けします
                 </p>
                 <a
-                  href="https://line.me/R/ti/p/@example"
+                  href="https://line.me/R/ti/p/@586oadhf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-green-500 text-white font-bold px-4 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm"
@@ -637,7 +637,7 @@ export default function Home() {
                 最新の補助金情報や採択のコツをLINEでお届けします
               </p>
               <a
-                href="https://line.me/R/ti/p/@example"
+                href="https://line.me/R/ti/p/@586oadhf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-green-500 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-600 transition-colors"
